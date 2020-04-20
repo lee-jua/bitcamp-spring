@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -70,11 +70,7 @@ footer {
 </style>
 </head>
 <body>
-
-
 <h2>홈페이지</h2>
-
-
 <header>
   <h2>Cities</h2>
 </header>
@@ -82,22 +78,27 @@ footer {
 <section>
   <nav>
     <ul>
-      <li><a id="a-first" href="join.html">Join</a></li>
-      <li><a id ="a-second" href="#">Login</a></li>
+      <li><a id="a-first" href="#">Join</a></li>
+      <li><a id ="a-second" href="index.html">Login</a></li>
       <li><a id="a-third" href="#">.....</a></li>
-      
-    
     </ul>
   </nav>
   
   <article>
     <form action="#">
+    <label>NAME</label><br>
+    <input id = "name" type="text"><br>
     <label>ID</label><br>
-    <input type="text"><br>
+    <input id = "userid" type="text"><br>
     <label>PASSWORD</label><br>
-    <input type="text"><br><br>
-    <input id = login-button type="button" value="로그인">
-    <input id = delete-button type="button"value="취소">
+    <input id = "passwd" type="text"><br>
+    <label>SSN</label><br>
+    <input id ="ssn" type="text"><br>
+    <label>ADDRESS</label><br>
+    <input id ="addr" type="text"><br>    <br>
+    <input id = join-button type="button" value="회원가입">
+    <input id = cancel-button type="button"value="취소">
+     
     </form>
   </article>
 </section>
@@ -109,19 +110,38 @@ footer {
 
 <script type="text/javascript"> 
 $('#a-first').click(function(){
-
+ 
 })
 $('#a-second').click(function(){
- 
+	 
 })
 $('#a-third').click(function(){
 	
 })
-$('#login-button').click(function(){
-   
+$('#join-button').click(function(){
+ 	let member = {name:$('#name').val(),
+			userid:$('#userid').val(),
+			passwd:$('#passwd').val(),
+			ssn:$('#ssn').val(),
+			addr:$('#addr').val()}
+	alert('입력된 주민번호 :' +member.ssn)
+	$.ajax({
+		url:'/join',
+		type: 'post',
+		data : JSON.stringify(member),
+		dataType : 'json',
+		contentType : 'application/json',
+		success : function(returnName){ //java에서 준 값이 parameter로 들어오게 되어있다
+			alert(returnName.name + ' 님 회원가입 성공!!')
+		},
+		error : function(){
+			alert('회원가입 실패')
+		}
+		
+	})
 })
 $('#cancel-button').click(function(){
- 
+   
 })
 </script>
 </body>
