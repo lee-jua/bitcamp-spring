@@ -3,7 +3,7 @@ package com.occamsrazor.web.member;
 public interface MemberService {
 public void add(Member member);
 public Member[] list();
-public Member login(Member member);
+public boolean login(Member member);
 public Member detail(String userid);
 public Member[] SearchByName(String name);
 public Member[] SearchByGender(String ssn);

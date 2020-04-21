@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -71,32 +71,33 @@ footer {
 </head>
 <body>
 
-
-
-
 <header>
-  <h2>로그인</h2>
+  <h2>점수 등록</h2>
 </header>
 
 <section>
   <nav>
     <ul>
-      <li><a id="a-first" href="member/join.html">Join</a></li>
-      <li><a id ="a-second" href="#">Login</a></li>
+      <li><a id="a-first" href="#">Join</a></li>
+      <li><a id ="a-second" href="../index.html">Login</a></li>
       <li><a id="a-third" href="#">.....</a></li>
-      
-    
     </ul>
   </nav>
   
   <article>
     <form action="#">
     <label>ID</label><br>
-    <input id= "userid" type="text"><br>
-    <label>PASSWORD</label><br>
-    <input id = "passwd" type="text"><br><br>
-    <input id = login-button type="button" value="로그인">
-    <input id = delete-button type="button"value="취소">
+    <input id = "userid" type="text"><br>
+    <label>korean</label><br>
+    <input id = "korean" type="text"><br>
+    <label>english</label><br>
+    <input id = "english" type="text"><br>
+    <label>math</label><br>
+    <input id ="math" type="text"><br>
+    <label>java</label><br>
+    <input id ="java" type="text"><br>    <br>
+    <input id = "register-button" type="button" value="점수 등록">
+     
     </form>
   </article>
 </section>
@@ -104,43 +105,34 @@ footer {
 <footer>
   <p>Footer</p>
 </footer>
-
-
-<script type="text/javascript"> 
-$('#a-first').click(function(){
-
-})
-$('#a-second').click(function(){
- 
-})
-$('#a-third').click(function(){ //parameter에 안에 있으면 json 밖에 있으면 body
-	
-})
-$('#login-button').click(function(){
+<script type= "text/javascript">
+$('#register-button').click(function(){
 	$.ajax({
-		url:'/member/login',
-		type: 'post', 
-		data : JSON.stringify({userid:$('#userid').val(),   
-				passwd:$('#passwd').val()}),
-		dataType : 'json',
-		contentType : 'application/json', 
-		success : function(message){ 
-			if(message ==='SUCCESS'){
-				location.href = "grade/register.html"
-			}else{
-				alert('다시 로그인 해주세요')
-				location.href = "index.html"
-			}
-		},
-		error : function(){
-			alert('Networking Error')
+		url:'/grade/register',
+		type:'post',
+		data:JSON.stringify({
+			userid:$('#userid').val(),
+			korean:$('#korean').val(),
+			english:$('#english').val(),
+			math:$('#math').val(),
+			java:$('#java').val()}),
+	dataType:'json',
+   	contentType:'application/json',
+   	
+   	
+	success : function(message){
+		if(message ==='SUCCESS'){
+			alert('등록 성공')
+		}else if(message ==='FAIL'){
+		alert('등록 실패')
 		}
-		
-	})
+},
+	error : function(){
+		alert('네트워킹 실패')
+}
 })
-$('#cancel-button').click(function(){
- 
 })
+
 </script>
 </body>
 </html>
