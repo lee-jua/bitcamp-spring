@@ -81,10 +81,9 @@ footer {
 <section>
   <nav>
     <ul>
-      <li><a id="a-first" href="member/join.html">Join</a></li>
-      <li><a id ="a-second" href="#">Login</a></li>
-      <li><a id="a-third" href="#">.....</a></li>
-      
+      <li><a id="join_a" >Join</a></li>
+      <li><a id ="login_a">Login</a></li>
+     
     
     </ul>
   </nav>
@@ -107,16 +106,21 @@ footer {
 
 
 <script type="text/javascript"> 
-$('#a-first').click(function(){
 
-})
-$('#a-second').click(function(){
- 
-})
-$('#a-third').click(function(){ //parameter에 안에 있으면 json 밖에 있으면 body
-	
-})
-$('#login-button').click(function(){
+$('#join_a')
+	.css('cursor','pointer')
+	.click(e=>{
+		e.preventDefault()
+		location.href="member/join.html"
+	})
+$('#login_a')
+	.css('cursor','pointer')
+	.click(e=>{
+		e.preventDefault()
+		location.href="index.html"
+	})
+$('#login-button').click(e =>{
+	e.preventDefault()
 	$.ajax({
 		url:'/member/login',
 		type: 'post', 
@@ -124,22 +128,22 @@ $('#login-button').click(function(){
 				passwd:$('#passwd').val()}),
 		dataType : 'json',
 		contentType : 'application/json', 
-		success : function(message){ 
-			if(message ==='SUCCESS'){
-				location.href = "grade/register.html"
+		success : d => { 
+			if(d ==='SUCCESS'){
+				location.href = "lotto/buy.html"
 			}else{
 				alert('다시 로그인 해주세요')
 				location.href = "index.html"
 			}
 		},
-		error : function(){
-			alert('Networking Error')
-		}
-		
+		 error: (request,status,error)=>{
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			   }
+
 	})
 })
-$('#cancel-button').click(function(){
- 
+$('#cancel-button').click(e =>{
+	   e.preventDefault()
 })
 </script>
 </body>

@@ -121,7 +121,8 @@ $('#a-third').click(function(){
 
 //let a = $('#ssn')
 //let a2 = a.val()
-$('#join-button').click(function(){
+$('#join-button').click(e=>{
+	e.preventDefault()
 	$.ajax({
 		url:'/member/join',
 		type: 'post', //join에서 add 쓰고있어서 get,put,delete
@@ -136,22 +137,24 @@ $('#join-button').click(function(){
 		
 //     속성/기능
 		
-		success : function(message){ //java에서 준 값이 parameter로 들어오게 되어있다  <--------주입        
-			if(message === 'SUCCESS'){  //String이라서 = 3개          
+		success : d => { //java에서 준 값이 parameter로 들어오게 되어있다  <--------주입        
+			if(d === 'SUCCESS'){  //String이라서 = 3개          
 				location.href="../index.html"
-			}else if(message === 'FAIL'){
+			}else if(d === 'FAIL'){
 				alert('로그인 실패')
 				location.href="join.html"
 			}
 		},
-		error : function(){
-			alert('네트워킹 실패')
-		}
+		 error: (request,status,error)=>{
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			   }
+
+
 		
 	})
 })
-$('#cancel-button').click(function(){
-   
+$('#cancel-button').click(e=>{
+   e.preventDefault()
 })
 </script>
 </body>

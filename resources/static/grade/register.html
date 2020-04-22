@@ -78,7 +78,7 @@ footer {
 <section>
   <nav>
     <ul>
-      <li><a id="a-first" href="#">Join</a></li>
+      <li><a id="a-first" >report</a></li>
       <li><a id ="a-second" href="../index.html">Login</a></li>
       <li><a id="a-third" href="#">.....</a></li>
     </ul>
@@ -88,17 +88,18 @@ footer {
     <form action="#">
     <label>ID</label><br>
     <input id = "userid" type="text"><br>
-    <label>korean</label><br>
+    <label>Korean</label><br>
     <input id = "korean" type="text"><br>
-    <label>english</label><br>
+    <label>English</label><br>
     <input id = "english" type="text"><br>
-    <label>math</label><br>
+    <label>Math</label><br>
     <input id ="math" type="text"><br>
-    <label>java</label><br>
+    <label>Java</label><br>
     <input id ="java" type="text"><br>    <br>
     <input id = "register-button" type="button" value="점수 등록">
-     
+     <input id = "credit-button" type="button" value="학점 보기">
     </form>
+    <div id = "result"></div>
   </article>
 </section>
 
@@ -106,33 +107,50 @@ footer {
   <p>Footer</p>
 </footer>
 <script type= "text/javascript">
-$('#register-button').click(function(){
+$('#register-button').click(e =>{ 
+	e.preventDefault()
+	$('#result').html('')
 	$.ajax({
 		url:'/grade/register',
 		type:'post',
-		data:JSON.stringify({
+		data:JSON.stringify({// {} - body 은닉화된 데이터를 보내는 방식
 			userid:$('#userid').val(),
 			korean:$('#korean').val(),
 			english:$('#english').val(),
 			math:$('#math').val(),
 			java:$('#java').val()}),
-	dataType:'json',
-   	contentType:'application/json',
+		dataType:'json',
+   		contentType:'application/json',
    	
    	
-	success : function(message){
-		if(message ==='SUCCESS'){
-			alert('등록 성공')
-		}else if(message ==='FAIL'){
-		alert('등록 실패')
-		}
-},
-	error : function(){
-		alert('네트워킹 실패')
+		success : d=>{
+			if(d==='SUCCESS'){
+				alert('등록 성공')
+			}else if(d ==='FAIL'){
+				alert('등록 실패')
+			}
+		},
+		error : (request,status,error)=>{
+		alert(request.status +"\n" + request.responseText +	"\n" + error)
 }
 })
 })
 
+$('#credit-button').click(e=>{
+	e.preventDefault()
+	$.ajax({ //서버에 있는 값을 가지고 오기 위해서는 ajax
+		url:'/grade/report/'+$('#userid').val(),
+		type:'get',
+		dataType:'json',
+   		contentType:'application/json',
+		success :d => {
+			$('#result').html('<h3>학점 : ' + d + ' </h3>')
+		},
+		error : (request,status,error)=>{
+			alert(request.status +"\n" + request.responseText +	"\n" + error)
+		}
+	})
+})
 </script>
 </body>
 </html>

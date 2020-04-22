@@ -72,13 +72,13 @@ footer {
 <body>
 
 <header>
-  <h2>성적표</h2>
+  <h2>로또 구매</h2>
 </header>
 
 <section>
   <nav>
     <ul>
-      <li><a id="a-first" href="#">Join</a></li>
+      <li><a id="a-first" >report</a></li>
       <li><a id ="a-second" href="../index.html">Login</a></li>
       <li><a id="a-third" href="#">.....</a></li>
     </ul>
@@ -88,23 +88,55 @@ footer {
     <form action="#">
     <label>ID</label><br>
     <input id = "userid" type="text"><br>
-    <label>korean</label><br>
-    <input id = "korean" type="text"><br>
-    <label>english</label><br>
-    <input id = "english" type="text"><br>
-    <label>math</label><br>
-    <input id ="math" type="text"><br>
-    <label>java</label><br>
-    <input id ="java" type="text"><br>    <br>
-    <input id = "register-button" type="button" value="점수 등록">
-     
+    <label>로또 번호 입력(,로 분리해 주세요)</label><br>
+    <input id = "lotto" type="text"><br>
+      <br>
+    <input id = "buy-button" type="button" value="로또 구매">
+     <input id = "result-button" type="button" value="당첨 결과">
     </form>
+    <div id = "result"></div>
   </article>
 </section>
 
 <footer>
   <p>Footer</p>
 </footer>
-
+<script type= "text/javascript">
+$('#buy-button').click(e=>{
+	e.preventDefault()
+	$.ajax({
+		url:'/lotto/buy/'+$('#userid').val()+','+$('#lotto').val(),
+		type:'post',
+		dataType:'json',
+		contentType:'application/json',
+		
+		success : d=>{
+			if(d ==='SUCCESS'){
+				alert('구매 완료')
+			}else{
+				alert('구매 실패')
+			}
+		},
+		 error: (request,status,error)=>{
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			   }
+		
+	})
+})
+$('#result-button').click(e=>{
+	e.preventDefault()
+	$.ajax({
+		url:'/lotto/prize/'+$('#userid').val(),
+		type:'Get',
+		dataType:'json',
+		contentType:'application/json',
+		success: d=>{},
+		error: (request,status,error)=>{
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		   }
+	
+	})
+})
+</script>
 </body>
 </html>

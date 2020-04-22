@@ -2,6 +2,8 @@ package com.occamsrazor.web.grade;
 
 import org.springframework.stereotype.Service;
 
+import com.occamsrazor.web.util.Credit;
+
 @Service
 public class GradeServiceImpl implements GradeService{
 private Grade[] grades;
@@ -40,10 +42,39 @@ public GradeServiceImpl() {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	@SuppressWarnings("static-access")
 	@Override
-	public Grade detail(Grade grade) {
-		// TODO Auto-generated method stub
-		return null;
+	public Credit detail(String userid) {
+		Credit credit = null;
+		switch (avg(userid)/10) {
+		case 10: case 9: credit = credit.A ; break;
+		case 8: credit = credit.B ; break;
+		case 7: credit = credit.C ; break;
+		case 6: credit = credit.D ; break;
+		case 5: credit = credit.E ; break;
+		default: credit = credit.F ; break;
+		}
+		return credit;
+		}
+	
+	private int avg(String userid) {
+		return total(userid)/4;
 	}
+	
+	private int total(String userid) {
+		int total = 0;
+		for (int i = 0; i < count; i++) {
+			if (userid.equals(grades[i].getUserid())) {
+				total = Integer.parseInt(grades[i].getKorean())
+						+ Integer.parseInt(grades[i].getEnglish())
+						+ Integer.parseInt(grades[i].getMath())
+						+ Integer.parseInt(grades[i].getJava());
+			}
+		}
+		return total;
+	}
+	
 	
 }
