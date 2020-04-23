@@ -111,8 +111,9 @@ $('#buy-button').click(e=>{
 		contentType:'application/json',
 		
 		success : d=>{
-			if(d ==='SUCCESS'){
-				alert('구매 완료')
+				if(d ==='SUCCESS'){
+					alert('구매 완료')
+					$('#result').html('')
 			}else{
 				alert('구매 실패')
 			}
@@ -130,7 +131,9 @@ $('#result-button').click(e=>{
 		type:'Get',
 		dataType:'json',
 		contentType:'application/json',
-		success: d=>{},
+		success :d => {
+			$('#result').html('<h3> 결과 : '+d+'</h3>')
+		},
 		error: (request,status,error)=>{
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		   }
