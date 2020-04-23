@@ -11,12 +11,12 @@ import com.occamsrazor.web.util.Messenger;
 import com.occamsrazor.web.util.Prize;
 
 @RestController
-@RequestMapping("/lotto")
-public class LottoController {
+@RequestMapping("/lotto") 
+public class LottoController {   
 	@Autowired LottoService lottoService;
 	
-	@PostMapping("/buy/{lotto}")
-	public Messenger buy(@PathVariable String lotto) {
+	@PostMapping("/buy/{lotto}")    //key 스트링
+	public Messenger buy(@PathVariable String lotto) {  //value 객체
 		int current = lottoService.count();
 		String[] lottos = lotto.split(",");
 		Lotto arr = new Lotto();

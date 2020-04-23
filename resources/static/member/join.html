@@ -78,9 +78,8 @@ footer {
 <section>
   <nav>
     <ul>
-      <li><a id="a-first" href="#">Join</a></li>
-      <li><a id ="a-second" href="../index.html">Login</a></li>
-      <li><a id="a-third" href="#">.....</a></li>
+      <li><a id="home_a" >Home</a></li>
+      
     </ul>
   </nav>
   
@@ -109,15 +108,11 @@ footer {
 
 
 <script type="text/javascript"> 
-$('#a-first').click(function(){
- 
+$('#home_a').css('cursor','pointer').click(e=>{
+ e.preventDefault()
+ location.href = "../index.html"
 })
-$('#a-second').click(function(){
-	 
-})
-$('#a-third').click(function(){
-	
-})
+
 
 //let a = $('#ssn')
 //let a2 = a.val()
