@@ -123,6 +123,7 @@ $('#login-button').click(e=>{
 	contentType:'application/json',
 	success : d=>{
 		if(d.messenger ==='SUCCESS'){
+			sessionStorage.setItem('userid', d.user.userid) //새션에 담았기 때문에 로그아웃하기 전까지 살아있다
 			location.href = "mypage.html"
 		}else{
 			location.href="signin.html"

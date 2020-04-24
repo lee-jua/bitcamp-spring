@@ -9,4 +9,8 @@ public int count(); //인공지능으로 public이 추가된다 신기하다
 public User login(User user);
 public User detail(String userid);
 
+public boolean update(User user);
+
+public boolean remove(String userid);
+
 }
