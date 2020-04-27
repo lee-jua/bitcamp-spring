@@ -97,15 +97,10 @@
     	  $('#addr').val(d.addr)
     	  $('#ssn').text(d.ssn)
     	  $('#passwd').val(d.passwd)
-      })
-      $('#cancel-button').click(e=>{
-    	  e.preventDefault()
-    	  location.href = "mypage.html"
-      })
-    	  const name = $('#name').val()
+    	    const name = $('#name').val()
     	  const addr = $('#addr').val()
     	  const passwd = $('#passwd').val()
-      $('#confirm-button').click(e=>{
+    	    $('#confirm-button').click(e=>{
     	  if(name === $('#name').val() && addr === $('#addr').val() && passwd === $('#passwd').val()){
     		  alert('변경사항이 없습니다')
     	  }else{
@@ -136,6 +131,13 @@
     		  })
     	  }
       })
+      })
+      $('#cancel-button').click(e=>{
+    	  e.preventDefault()
+    	  location.href = "mypage.html"
+      })
+    	
+    
       $('#remove-button').click(e=>{
     	  e.preventDefault()
     	  $.ajax({
